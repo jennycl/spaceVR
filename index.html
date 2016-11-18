@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="UTF-8">
+		
+		<!-- P5 libraries -->
+		<script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+		
+		<!-- A-Frame libraries -->
+		<script language="javascript" type="text/javascript" src="libraries/aframe.min.js"></script>
+
+    <!-- Craig's A-Frame Wrapper API -->
+    <script language="javascript" type="text/javascript" src="aframep5.js"></script>
+
+		<!-- P5 Sketch -->
+		<script language="javascript" type="text/javascript" src="sketch.js"></script>
+		
+	</head>
+	<body>
+		
+		<!-- container to hold our VR scene -->	
+		<a-scene id="VRScene">
+		  
+		  <!-- container to hold our assets -->
+		  <a-assets>
+		    <img id="stonebrick" src="images/stonebrick.png" />
+		  </a-assets>
+		  
+		  <!-- sky --> 
+		  
+		  <a-sky id="sky" src="images/morespace.jpg"></a-sky>
+		</a-scene>
+
+	</body>
+</html>
