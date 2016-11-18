@@ -13,7 +13,10 @@ function setup() {
 	var mercury = new Sphere({
 						x:-10, y:5, z:0,
 						radius: .1,
-						red:random(255), green:random(255), blue:random(255)
+						material:{
+						  asset:'mercury'
+						}
+						
 					});
 	world.add(mercury);
 	
@@ -21,7 +24,9 @@ function setup() {
 	var venus = new Sphere({
 						x:-7, y:5, z:0,
 						radius: .2,
-						red:random(255), green:random(255), blue:random(255)
+						material:{
+						  asset:'venus'
+						}
 					});
 	world.add(venus);
 	
@@ -29,7 +34,9 @@ function setup() {
 	var earth = new Sphere({
 						x:-5, y:5, z:0,
 						radius: .4,
-						red:random(255), green:random(255), blue:random(255)
+						material:{
+						  asset:'earth'
+						}
 					});
 	world.add(earth);
 	
@@ -37,7 +44,9 @@ function setup() {
 	var mars = new Sphere({
 						x:-8, y:5, z:0,
 						radius: .4,
-						red:random(255), green:random(255), blue:random(255)
+						material:{
+						  asset:'mars',
+						}
 					});
 	world.add(mars);
 	
@@ -45,7 +54,9 @@ function setup() {
 	var jupiter = new Sphere({
 						x:-3, y:5, z:0,
 						radius: 1,
-						red:random(255), green:random(255), blue:random(255)
+						material:{
+						  asset:'jupiter',
+						}
 					});
 	world.add(jupiter);
 	
@@ -53,14 +64,18 @@ function setup() {
 	var saturn = new Sphere({
 						x:-1, y:5, z:0,
 						radius: 1,
-						red:random(255), green:random(255), blue:random(255)
+						material:{
+						  asset:'saturn',
+						}
 					});
 	world.add(saturn);
 	  	// sphere primitive
 	var uranus = new Sphere({
 						x:3, y:5, z:0,
 						radius: .6,
-						red:random(255), green:random(255), blue:random(255)
+						material:{
+						  asset:'uranus',
+						}
 					});
 	world.add(uranus);
 	
@@ -68,7 +83,9 @@ function setup() {
 	var neptune = new Sphere({
 						x:5, y:5, z:0,
 						radius: .5,
-						red:random(255), green:random(255), blue:random(255)
+						material:{
+						  asset:'neptune',
+						}
 					});
 	world.add(neptune);
 	
@@ -77,7 +94,9 @@ function setup() {
 	var pluto = new Sphere({
 						x:5, y:5, z:0,
 						radius: .1,
-						red:random(255), green:random(255), blue:random(255)
+					  material:{
+					    asset:'pluto'
+					  }
 					});
 	world.add(pluto);
 	
@@ -94,7 +113,9 @@ function setup() {
 	world.add(r);
 	
  
-  
+  // textureLoader.load('images/earth.jpg',function(texture)){
+    
+  // }
  
 }
 
