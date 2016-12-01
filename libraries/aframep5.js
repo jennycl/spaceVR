@@ -1,6 +1,6 @@
 /* library: aframep5.js 
    author: craig kapp
-   date: 11/2/2016  */
+   date: 11/13/2016  */
 
 function Container3D(opts) {
 	// store desired options
@@ -25,73 +25,59 @@ function Container3D(opts) {
 	initializerSettersAndGetters(this);	
 }
 
+function DAE(opts) {
+	// store desired options
+	setEntityOptions(opts, this);
 
-function Sky(opts) {
-	// process opts
-	if (!'material' in opts) {
-		opts.material = {};
-	}
+	// store what kind of primitive shape this entity is
+	this.prim = 'dae';
+	
+	// set asset id
+	this.tag.setAttribute('collada-model', '#' + opts.asset);
+	
+	// set scale
+	setScale(this.opts, this);	
+	
+	// set position
+	setPosition(this.opts, this);
 
-	// store our asset
-	if ('asset' in opts.material) {
-		this.asset = opts.material.asset;
-	}
-	else {
-		this.asset = 'None';
-	}
-	
-	// store our color
-	if ('red' in opts.material) {
-		this.red = parseInt(opts.material.red);		
-	}
-	else {
-		this.red = 255;
-	}
-	if ('green' in opts.material) {
-		this.green = parseInt(opts.material.green);		
-	}
-	else {
-		this.green = 255;
-	}
-	if ('blue' in opts.material) {
-		this.blue = parseInt(opts.material.blue);		
-	}
-	else {
-		this.blue = 255;
-	}
-	
-	// generate a sky tag
-	this.tag = document.createElement('a-sky');
-	
-	// add in our sky properties
-	if (this.asset != 'None') {
-		this.tag.setAttribute('src', '#'+this.asset);
-	}
-	this.tag.setAttribute('color', 'rgb(' + this.red + ',' + this.green + ',' + this.blue + ')');
-	
+	// set rotation
+	setRotation(this.opts, this);
 
-	this.setAsset = function(v) {
-		this.asset = v;
-		if (this.asset == 'None') {
-			this.tag.removeAttribute('src');
-		}
-		else {
-			this.tag.setAttribute('src', '#'+v);
-		}
-	}
-	this.getAsset = function() {
-		return this.asset;
-	}
+	// set visibility	
+	setVisibility(this.opts, this);
 	
-	this.setColor = function(r,g,b) {
-		this.red = parseInt(r);
-		this.green = parseInt(g);
-		this.blue = parseInt(b);
-		
-		this.tag.setAttribute('color', 'rgb(' + this.red + ',' + this.green + ',' + this.blue + ')');
-	}
+	// init common setters / getters
+	initializerSettersAndGetters(this);	
 }
 
+function OBJ(opts) {
+	// store desired options
+	setEntityOptions(opts, this);
+
+	// store what kind of primitive shape this entity is
+	this.prim = 'obj';
+	
+	// set asset id
+	this.tag.setAttribute('obj-model', 'obj: #' + opts.asset + '; mtl: #' + opts.mtl);
+	
+	console.log(this.tag);
+	
+	// set scale
+	setScale(this.opts, this);	
+	
+	// set position
+	setPosition(this.opts, this);
+
+	// set rotation
+	setRotation(this.opts, this);
+
+	// set visibility	
+	setVisibility(this.opts, this);
+	
+	// init common setters / getters
+	initializerSettersAndGetters(this);	
+}
 
 function Box(opts) {
 	// store desired options
@@ -296,45 +282,6 @@ function Dodecahedron(opts) {
 	initializerSettersAndGetters(this);
 }
 
-
-function Dodecahedron(opts) {
-	// store desired options
-	setEntityOptions(opts, this);
-
-	// store what kind of primitive shape this entity is
-	this.prim   = 'dodecahedron';
-
-	// setup geometry parameters
-	if (!('radius' in opts)) {
-		opts.radius = 1;
-	}
-	this.radius = opts.radius;
-
-	// set geometry
-	setGeometry(this);
-
-	// set material
-	processMaterial(this);
-	setMaterial(this);
-
-	// set scale
-	setScale(this.opts, this);
-	
-	// set position
-	setPosition(this.opts, this);
-
-	// set rotation
-	setRotation(this.opts, this);
-
-	// set visibility	
-	setVisibility(this.opts, this);
-
-	// set click handler
-	setClickHandler(this);
-	
-	// init common setters / getters
-	initializerSettersAndGetters(this);
-}
 
 
 function Octahedron(opts) {
@@ -623,7 +570,7 @@ function Ring(opts) {
 
 	// setup geometry parameters
 	if (!('radiusInner' in opts)) {
-		opts.radiusInner = 1;
+		opts.radiusInner = 0.5;
 	}
 	this.radiusInner = opts.radiusInner;
 
@@ -866,72 +813,69 @@ function setGeometry(entity) {
 function processMaterial(entity) {	
 	// handle common attributes
 	var opts = entity.opts;
-	if (!('material' in opts)) {
-		opts.material = {};
-	}
 	
-	if (!('opacity' in opts.material)) {
-		opts.material.opacity = 1.0;
+	if (!('opacity' in opts)) {
+		opts.opacity = 1.0;
 	}
-	entity.opacity = opts.material.opacity;
+	entity.opacity = opts.opacity;
 
-	if (!('transparent' in opts.material)) {
-		opts.material.transparent = false;
+	if (!('transparent' in opts)) {
+		opts.transparent = false;
 	}
-	entity.transparent = opts.material.transparent;
+	entity.transparent = opts.transparent;
 
-	if (!('shader' in opts.material)) {
-		opts.material.shader = 'standard';
+	if (!('shader' in opts)) {
+		opts.shader = 'standard';
 	}
-	entity.shader = opts.material.shader;
+	entity.shader = opts.shader;
 
-	if (!('side' in opts.material)) {
-		opts.material.side = 'front';
+	if (!('side' in opts)) {
+		opts.side = 'front';
 	}
-	entity.side = opts.material.side;
+	entity.side = opts.side;
 
-	if (!('metalness' in opts.material)) {
-		opts.material.metalness = 0.1;
+	if (!('metalness' in opts)) {
+		opts.metalness = 0.1;
 	}
-	entity.metalness = opts.material.metalness;
+	entity.metalness = opts.metalness;
 
-	if (!('roughness' in opts.material)) {
-		opts.material.roughness = 0.5;
+	if (!('roughness' in opts)) {
+		opts.roughness = 0.5;
 	}
-	entity.roughness = opts.material.roughness;
+	entity.roughness = opts.roughness;
 	
-	if (!('repeatX' in opts.material)) {
-		opts.material.repeatX = 1;
+	if (!('repeatX' in opts)) {
+		opts.repeatX = 1;
 	}
-	entity.repeatX = opts.material.repeatX;
+	entity.repeatX = opts.repeatX;
 
-	if (!('repeatY' in opts.material)) {
-		opts.material.repeatY = 1;
+	if (!('repeatY' in opts)) {
+		opts.repeatY = 1;
 	}		
-	entity.repeatY = opts.material.repeatY;
+	entity.repeatY = opts.repeatY;
 	
 	// set color values
-	if ('red' in opts.material) {
-		entity.red = parseInt(opts.material.red);
+	if ('red' in opts) {
+		entity.red = parseInt(opts.red);
 	}		
 	else {
 		entity.red = 255;
 	}
-	if ('green' in opts.material) {
-		entity.green = parseInt(opts.material.green);
+	if ('green' in opts) {
+		entity.green = parseInt(opts.green);
 	}		
 	else {
 		entity.green = 255;
 	}
-	if ('blue' in opts.material) {
-		entity.blue = parseInt(opts.material.blue);
+	if ('blue' in opts) {
+		entity.blue = parseInt(opts.blue);
 	}		
 	else {
 		entity.blue = 255;
 	}	
 	
-	if ('asset' in opts.material) {
-		entity.asset = opts.material.asset;
+	if ('asset' in opts) {
+		entity.asset = opts.asset;
 	}
 	else {
 		entity.asset = 'None';
@@ -1184,6 +1128,14 @@ function initializerSettersAndGetters(entity) {
 		return this.visible;
 	}
 	
+	entity.getScale = function() {
+		var s = {};
+		s.x = this.scaleX;
+		s.y = this.scaleY;
+		s.z = this.scaleZ;
+		return s;
+	}
+	
 	entity.getScaleX = function() {
 		return this.scaleX;
 	}
@@ -1194,6 +1146,14 @@ function initializerSettersAndGetters(entity) {
 	
 	entity.getScaleZ = function() {
 		return this.scaleZ;
+	}
+	
+	entity.setScale = function(x,y,z) {
+		this.scaleX = x;
+		this.scaleY = y;
+		this.scaleZ = z;
+
+		this.tag.setAttribute('scale', this.scaleX + ' ' + this.scaleY + ' ' + this.scaleZ);
 	}
 	
 	entity.setScaleX = function(sx) {
@@ -1362,6 +1322,8 @@ function initializerSettersAndGetters(entity) {
 			setMaterial(this);
 		}
 	}
+	
+	// need to add repeatY zzz
 
 	entity.getAsset = function() {
 		if ('asset' in this) {
@@ -1885,7 +1847,7 @@ function Camera() {
 	this.setWASD(false);
 	
 	// constructor our cursor graphic
-	this.cursor = new Ring({x:0, y:0, z:-1.0, radiusInner: 0.02, radiusOuter: 0.03, side: 'double', material:{red:0, green:0, blue:0, shader:'flat', opacity: 0.5}});
+	this.cursor = new Ring({x:0, y:0, z:-1.0, radiusInner: 0.02, radiusOuter: 0.03, side: 'double', red:0, green:0, blue:0, shader:'flat', opacity: 0.5});
 	this.cursor.tag.setAttribute('cursor', 'fuse: false');
 	
 	// register to be notifed when the camera position has been updated
