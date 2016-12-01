@@ -16,13 +16,10 @@ function preload(){
   sound = loadSound('meow.wav');
 }
 
-
 function setup() {
-  
- 
   // no canvas needed
   noCanvas();
-    var sky = select("sky");
+  var sky = select("sky");
   
   var startX= 0;
   // create a VR World (tell it to look for the 'VRScene' id for our scene tag)
@@ -41,10 +38,7 @@ function setup() {
 	mercury = new Sphere({
 						x:-10, y:5, z:0,
 						radius: .1,
-						material:{
-						  asset:'mercury'
-						}
-						
+						asset:'mercury'
 					});
 	world.add(mercury);
 	
@@ -52,9 +46,7 @@ function setup() {
 	venus = new Sphere({
 						x:-7, y:5, z:0,
 						radius: .2,
-						material:{
-						  asset:'venus'
-						}
+						asset:'venus'
 					});
 	world.add(venus);
 	
@@ -62,9 +54,7 @@ function setup() {
  earth = new Sphere({
 						x:-5, y:5, z:0,
 						radius: .4,
-						material:{
-						  asset:'earth'
-						},
+						asset:'earth',
 						clickFunction: function(){
 						  sound.play();
 						}
@@ -75,9 +65,7 @@ function setup() {
 	mars = new Sphere({
 						x:-3, y:5, z:0,
 						radius: .4,
-						material:{
-						  asset:'mars',
-						}
+						asset: 'mars'
 					});
 	world.add(mars);
 	
@@ -85,9 +73,7 @@ function setup() {
 	jupiter = new Sphere({
 						x:-1, y:5, z:0,
 						radius: 1,
-						material:{
-						  asset:'jupiter',
-						},
+						asset:'jupiter',
 						clickFunction: function(c){
         		  c.setRed(random(255));
         		  c.setBlue(random(255));
@@ -104,80 +90,63 @@ function setup() {
  saturn = new Sphere({
 						x:3, y:0, z:0,
 						radius: 1,
-						material:{
-						  asset:'saturn',
-						}
+						asset:'saturn'
 					});
 
   container.addChild(saturn);
-		// ring primitive
+	// ring primitive
 	var ring = new Ring({
 						x: 3 , y:0, z:0,
 						radiusInner:1.2,
 						radiusOuter: 1.8,
 					  rotationX:-40, metalness:0.25,
-						material : {
-  						red:255, green:200, blue:200
-						}
+  					red:255, green:200, blue:200
 					});
   container.addChild(ring);
   
-	  	// sphere primitive
+	// sphere primitive
 	uranus = new Sphere({
 						x:8, y:5, z:0,
 						radius: .6,
-						material:{
-						  asset:'uranus',
-						}
+						asset:'uranus'
 					});
 	world.add(uranus);
 	
-	  	// sphere primitive
+	// sphere primitive
   neptune = new Sphere({
 						x:9, y:5, z:0,
 						radius: .5,
-						material:{
-						  asset:'neptune',
-						}
+					  asset:'neptune'
 					});
 	world.add(neptune);
 	
 		
-	  	// sphere primitive
+	// sphere primitive
 	pluto = new Sphere({
 						x:10, y:5, z:0,
 						radius: .1,
-					  material:{
-					    asset:'pluto'
-					  }
+					  asset:'pluto'
 					});
 	world.add(pluto);
-	
-		
+
 	// add a Wavefront (OBJ) model
 	// you need to make sure to reference both the OBJ and MTL file here
-	/*bb = new OBJ({
+	bb = new OBJ({
 		asset: 'bb_obj',
 		mtl: 'bb_mtl',
 		x: 5,
 		y: 4,
 		z: 0,
-		rotationX:180,
-		scaleX:8,
-		scaleY:8,
-		scaleZ:8,
+		scaleX:100,
+		scaleY:100,
+		scaleZ:100
 	});
 	world.add(bb);
-	
- */
- 
- 
+
  trg = new Box({
 						x:-10, y:1, z:0, 
 						width:1, height: 1.2, depth: 2,
-						material:{
-  						red:random(255), green:random(255), blue:random(255)
-						}
+						red:random(255), green:random(255), blue:random(255)
 					});
 	world.add(trg);
   
@@ -185,9 +154,7 @@ function setup() {
 						x: 6 , y:2, z:0,
 						height:1.5,
 						radius: 0.25,
-						material:{
-						  red:random(255), green:random(255), blue:random(255)
-						}
+						red:random(255), green:random(255), blue:random(255)
 					});
 	world.add(sqr);
  
@@ -195,9 +162,7 @@ function setup() {
 						x: 12 , y:1, z:0,
 						radius:0.5,
 						radiusTubular: 0.05,
-						material: {
-						  red:random(255), green:random(255), blue:random(255)
-						}
+						red:random(255), green:random(255), blue:random(255)
 					});
 	world.add(cyl);	
  
@@ -208,9 +173,7 @@ function Particle(x, y, z){
   this.thing = new Dodecahedron({
       x: -4, y:1, z:0,
 			radius: 0.5,
-			material: {
-			  red:random(255), green:random(255), blue:random(255)
-			},
+			red:random(255), green:random(255), blue:random(255)
   });
   
   world.add(this.thing);
@@ -236,7 +199,6 @@ function Particle(x, y, z){
 		// set the position of our box (using the 'nudge' method)
 		this.thing.nudge(xMovement, yMovement, zMovement);
 	}
-  
 }
 
 
@@ -246,11 +208,9 @@ function draw() {
     world.moveUserForward(.1);
   }
   
-  
   // draw all particles
 	for (var i = 0; i < particles.length; i++) {
 	  particles[i].move();
-		
 	}
     
   mercury.spinX(0.5);
@@ -262,6 +222,4 @@ function draw() {
   neptune.spinY(0.5);
   uranus.spinY(0.4); 
   pluto.spinY(0.5);
-
-  
 }
