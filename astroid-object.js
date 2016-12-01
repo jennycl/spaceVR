@@ -8,7 +8,7 @@ function setup() {
   world = new World('VRScene');
   // set our sky to the newly selected image
   // var sky = select('#theSky');
-  myDAE = new DAE({asset:'model'});
+  // myDAE = new DAE({asset:'model'});
   astroid = new Astroid(0,0,0);
 }
 
