@@ -6,6 +6,7 @@
 		<!-- P5 libraries -->
 		<script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
 		<script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/p5.sound.js"></script>
 		
 		<!-- A-Frame libraries -->
 		<script language="javascript" type="text/javascript" src="libraries/aframe.min.js"></script>
@@ -19,18 +20,26 @@
 	</head>
 	<body>
 		
+		
 		<!-- container to hold our VR scene -->	
 		<a-scene id="VRScene">
-		  
+		  <a-assets id="VRAssets">
 		  <!-- container to hold our assets -->
-		  <a-assets>
-		    <img id="stonebrick" src="images/stonebrick.png" />
-		  </a-assets>
+		    <img id="mercury" src="images/mercury.png" /></a-assets>
+		    <img id="venus" src="images/venus.png"/></a-assets>
+		    <img id="earth" src ="images/earth.png"/></a-assets>
+		    <img id="mars" src="images/mars.png"/></a-assets>
+		    <img id="jupiter" src ="images/jupiter.png"/></a-assets>
+		    <img id="saturn" src="images/saturn.png"/></a-assets>
+		    <img id="uranus" src="images/uranus.png"/></a-assets>
+		    <img id="pluto" src="images/pluto.png"/></a-assets>
+		</a-assets>
 		  
-		  <!-- sky --> 
 		  
+		  <!-- sky -->
 		  <a-sky id="sky" src="images/morespace.jpg"></a-sky>
 		</a-scene>
-
+		
+		
 	</body>
 </html>
