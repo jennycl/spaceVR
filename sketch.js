@@ -4,9 +4,13 @@ var container;
 
 var  mercury, venus, earth, mars, jupiter, saturn, neptune, uranus, pluto; 
 
+var trg, sqr, cyl; 
+
 var sound; 
 
 var particles = [];
+
+var bb;
 
 function preload(){
   sound = loadSound('meow.wav');
@@ -83,7 +87,12 @@ function setup() {
 						radius: 1,
 						material:{
 						  asset:'jupiter',
-						}
+						},
+						clickFunction: function(c){
+        		  c.setRed(random(255));
+        		  c.setBlue(random(255));
+        		  c.setGreen(random(255));
+  		      }
 					});
 	world.add(jupiter);
 	
@@ -143,10 +152,54 @@ function setup() {
 					  }
 					});
 	world.add(pluto);
+	
+		
+	// add a Wavefront (OBJ) model
+	// you need to make sure to reference both the OBJ and MTL file here
+	/*bb = new OBJ({
+		asset: 'bb_obj',
+		mtl: 'bb_mtl',
+		x: 5,
+		y: 4,
+		z: 0,
+		rotationX:180,
+		scaleX:8,
+		scaleY:8,
+		scaleZ:8,
+	});
+	world.add(bb);
+	
+ */
  
-  // textureLoader.load('images/earth.jpg',function(texture)){
-    
-  // }
+ 
+ trg = new Box({
+						x:-10, y:1, z:0, 
+						width:1, height: 1.2, depth: 2,
+						material:{
+  						red:random(255), green:random(255), blue:random(255)
+						}
+					});
+	world.add(trg);
+  
+ sqr = new Cylinder({
+						x: 6 , y:2, z:0,
+						height:1.5,
+						radius: 0.25,
+						material:{
+						  red:random(255), green:random(255), blue:random(255)
+						}
+					});
+	world.add(sqr);
+ 
+ cyl = new TorusKnot({
+						x: 12 , y:1, z:0,
+						radius:0.5,
+						radiusTubular: 0.05,
+						material: {
+						  red:random(255), green:random(255), blue:random(255)
+						}
+					});
+	world.add(cyl);	
  
 }
 
@@ -155,7 +208,9 @@ function Particle(x, y, z){
   this.thing = new Dodecahedron({
       x: -4, y:1, z:0,
 			radius: 0.5,
-			red:random(255), green:random(255), blue:random(255),
+			material: {
+			  red:random(255), green:random(255), blue:random(255)
+			},
   });
   
   world.add(this.thing);
@@ -186,11 +241,11 @@ function Particle(x, y, z){
 
 
 function draw() {
-/*
+
   if (mouseIsPressed){
     world.moveUserForward(.1);
   }
-  */
+  
   
   // draw all particles
 	for (var i = 0; i < particles.length; i++) {
