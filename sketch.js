@@ -11,6 +11,7 @@ var sound;
 var particles = [];
 
 var bb;
+var satellite;
 
 function preload(){
   sound = loadSound('meow.wav');
@@ -129,19 +130,24 @@ function setup() {
 					});
 	world.add(pluto);
 
-	// add a Wavefront (OBJ) model
-	// you need to make sure to reference both the OBJ and MTL file here
-	bb = new OBJ({
-		asset: 'bb_obj',
-		mtl: 'bb_mtl',
-		x: 5,
-		y: 4,
-		z: 0,
-		scaleX:100,
-		scaleY:100,
-		scaleZ:100
-	});
-	world.add(bb);
+// 	// add a Wavefront (OBJ) model
+// 	// you need to make sure to reference both the OBJ and MTL file here
+// 	bb = new OBJ({
+// 		asset: 'bb_obj',
+// 		mtl: 'bb_mtl',
+// 		x: 5,
+// 		y: 4,
+// 		z: 0,
+// 		scaleX:100,
+// 		scaleY:100,
+// 		scaleZ:100
+// 	});
+// 	world.add(bb);
+
+satellite = new DAE({
+  asset: 'model'
+});
+world.add(satellite);
 
  trg = new Box({
 						x:-10, y:1, z:0, 
