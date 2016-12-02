@@ -2,12 +2,12 @@
 <html lang="en-us">
 	<head>
 		<meta charset="UTF-8">
-		
+
 		<!-- P5 libraries -->
 		<script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
 		<script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
 		<script language="javascript" type="text/javascript" src="libraries/p5.sound.js"></script>
-		
+
 		<!-- A-Frame libraries -->
 		<script language="javascript" type="text/javascript" src="libraries/aframe.min.js"></script>
 
@@ -16,12 +16,12 @@
 
 		<!-- P5 Sketch -->
 		<script language="javascript" type="text/javascript" src="sketch.js"></script>
-		
+
 	</head>
 	<body>
-		
-		
-		<!-- container to hold our VR scene -->	
+
+
+		<!-- container to hold our VR scene -->
 		<a-scene id="VRScene">
 		  <a-assets id="VRAssets">
 		  <!-- container to hold our assets -->
@@ -35,13 +35,14 @@
 		    <img id="pluto" src="images/pluto.png"/></a-assets>
 		    <a-asset id="bb_obj" src="images/bb-unit.obj"></a-asset>
 				<a-asset id="bb_mtl" src="images/bb-unit.mtl"></a-asset>
+				<a-asset id="model" src="images/model.dae"></a-asset>
 		</a-assets>
-		  
-		  
+
+
 		  <!-- sky -->
 		  <a-sky id="sky" src="images/morespace.jpg"></a-sky>
 		</a-scene>
-		
-		
+
+
 	</body>
 </html>
